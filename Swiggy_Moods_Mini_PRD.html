@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swiggy Moods — Mini PRD</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #FF6B35;
+    --orange-light: #FFF0EB;
+    --orange-mid: #FFD6C0;
+    --dark: #1A1A2E;
+    --dark-mid: #2D2D44;
+    --gray-100: #F7F7F5;
+    --gray-200: #EFEFEB;
+    --gray-300: #DEDDD8;
+    --gray-500: #888780;
+    --gray-700: #444441;
+    --text: #1A1A2E;
+    --text-muted: #666660;
+    --green: #2E7D32;
+    --green-light: #E8F5E9;
+    --amber: #E65100;
+    --amber-light: #FFF3E0;
+    --blue: #0C447C;
+    --blue-light: #E6F1FB;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #F4F3EF;
+    color: var(--text);
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+  }
+
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--dark);
+    border-radius: 20px;
+    padding: 48px 52px 40px;
+    margin-bottom: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: var(--orange);
+    border-radius: 50%;
+    opacity: 0.08;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 30%;
+    width: 200px; height: 200px;
+    background: var(--orange);
+    border-radius: 50%;
+    opacity: 0.05;
+  }
+
+  .header-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,107,53,0.2);
+    border: 1px solid rgba(255,107,53,0.3);
+    color: var(--orange-mid);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+
+  .header-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--orange);
+    border-radius: 50%;
+  }
+
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 56px;
+    color: #fff;
+    line-height: 1.05;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .header h1 span {
+    color: var(--orange);
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .meta-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+  }
+
+  .meta-value {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    font-weight: 400;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    background: #fff;
+    border-radius: 16px;
+    padding: 36px 40px;
+    margin-bottom: 8px;
+    border: 1px solid var(--gray-200);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .section-number {
+    width: 32px; height: 32px;
+    background: var(--orange-light);
+    color: var(--orange);
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--dark);
+    font-weight: 400;
+  }
+
+  /* ── EXECUTIVE SUMMARY ── */
+  .exec-summary {
+    background: var(--orange-light);
+    border-radius: 12px;
+    padding: 24px 28px;
+    border-left: 4px solid var(--orange);
+  }
+
+  .exec-summary p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--dark-mid);
+  }
+
+  /* ── PROBLEM STATEMENT ── */
+  .problem-text {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text-muted);
+  }
+
+  .problem-text strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .pain-points {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .pain-card {
+    background: var(--gray-100);
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px solid var(--gray-200);
+  }
+
+  .pain-icon {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .pain-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .pain-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ── PERSONA ── */
+  .persona-card {
+    background: var(--gray-100);
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--gray-200);
+  }
+
+  .persona-top {
+    background: var(--dark);
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .avatar {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .persona-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .persona-role {
+    font-size: 13px;
+    color: var(--gray-500);
+  }
+
+  .persona-stats {
+    display: flex;
+    gap: 0;
+    background: var(--dark-mid);
+  }
+
+  .stat {
+    flex: 1;
+    padding: 16px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .stat:last-child { border-right: none; }
+
+  .stat-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--orange);
+    margin-bottom: 2px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    color: var(--gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .persona-body {
+    padding: 24px 28px;
+  }
+
+  .persona-body p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text-muted);
+  }
+
+  .persona-body p strong {
+    color: var(--dark);
+    font-weight: 600;
+  }
+
+  .persona-insight {
+    margin-top: 16px;
+    padding: 14px 18px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid var(--gray-200);
+    font-size: 13px;
+    color: var(--orange);
+    font-weight: 500;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .persona-insight::before {
+    content: '→';
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── SOLUTION ── */
+  .journey {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 28px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .journey-step {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-shrink: 0;
+  }
+
+  .step-box {
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  .step-box.start {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: #fff;
+  }
+
+  .step-box.end {
+    background: var(--dark);
+    border-color: var(--dark);
+    color: #fff;
+  }
+
+  .step-box.highlight {
+    background: var(--orange-light);
+    border-color: var(--orange-mid);
+    color: var(--orange);
+    font-weight: 600;
+  }
+
+  .arrow {
+    color: var(--gray-300);
+    font-size: 14px;
+    padding: 0 4px;
+    flex-shrink: 0;
+  }
+
+  .mood-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .mood-card {
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    border-radius: 12px;
+    padding: 18px 12px;
+    text-align: center;
+    transition: all 0.2s;
+    cursor: default;
+  }
+
+  .mood-card:hover {
+    border-color: var(--orange-mid);
+    background: var(--orange-light);
+    transform: translateY(-2px);
+  }
+
+  .mood-emoji {
+    font-size: 24px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .mood-name {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 3px;
+  }
+
+  .mood-sub {
+    font-size: 10.5px;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .how-it-works {
+    background: var(--gray-100);
+    border-radius: 10px;
+    padding: 20px 24px;
+    border: 1px solid var(--gray-200);
+  }
+
+  .how-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--orange);
+    margin-bottom: 10px;
+  }
+
+  .how-it-works p {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text-muted);
+  }
+
+  /* ── METRICS ── */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .metric-row {
+    display: grid;
+    grid-template-columns: 140px 1fr auto;
+    align-items: center;
+    gap: 20px;
+    background: var(--gray-100);
+    border-radius: 10px;
+    padding: 18px 22px;
+    border: 1px solid var(--gray-200);
+  }
+
+  .metric-type {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .metric-type.primary { color: var(--orange); }
+  .metric-type.habit { color: var(--blue); }
+  .metric-type.guardrail { color: var(--green); }
+
+  .metric-desc {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .metric-target {
+    background: #fff;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--dark);
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  /* ── TRADE-OFFS ── */
+  .tradeoff-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .tradeoff-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 20px;
+    padding: 20px 24px;
+    background: var(--gray-100);
+    border-radius: 10px;
+    border: 1px solid var(--gray-200);
+  }
+
+  .tradeoff-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    padding-top: 2px;
+  }
+
+  .tradeoff-label.risk { color: #C62828; }
+  .tradeoff-label.trigger { color: var(--amber); }
+  .tradeoff-label.response { color: var(--green); }
+
+  .tradeoff-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+
+  .risk .tradeoff-dot { background: #C62828; }
+  .trigger .tradeoff-dot { background: var(--amber); }
+  .response .tradeoff-dot { background: var(--green); }
+
+  .tradeoff-text {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text-muted);
+  }
+
+  .tradeoff-text strong {
+    color: var(--dark);
+    font-weight: 600;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: var(--dark);
+    border-radius: 12px;
+    margin-top: 8px;
+  }
+
+  .footer-left {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .footer-left span { color: var(--orange); }
+
+  .footer-right {
+    font-size: 12px;
+    color: var(--gray-500);
+  }
+
+  @media (max-width: 640px) {
+    .header { padding: 32px 28px; }
+    .header h1 { font-size: 38px; }
+    .section { padding: 28px 24px; }
+    .pain-points { grid-template-columns: 1fr; }
+    .mood-grid { grid-template-columns: repeat(2, 1fr); }
+    .metric-row { grid-template-columns: 1fr; }
+    .tradeoff-row { grid-template-columns: 1fr; gap: 8px; }
+    .footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-tag">PM Portfolio · Feature Concept</div>
+    <h1>Swiggy <span>Moods</span></h1>
+    <div class="header-meta">
+      <div class="meta-item">
+        <span class="meta-label">Document Type</span>
+        <span class="meta-value">Mini Product Requirements Document</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Platform</span>
+        <span class="meta-value">Swiggy — Food Delivery App</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Stage</span>
+        <span class="meta-value">Conceptual Feature Proposal</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">01</div>
+      <h2 class="section-title">Executive Summary</h2>
+    </div>
+    <div class="exec-summary">
+      <p>We are building <strong>Swiggy Moods</strong> for young professionals living in Tier-1 and Tier-2 cities whose food ordering decisions are often driven by emotion and vibe rather than functional hunger alone. With rising disposable incomes and increasing screen fatigue among digitally native young professionals, there is a growing gap between what users feel in the moment and what Swiggy's current generic discovery experience offers them. Swiggy Moods bridges this gap by surfacing contextual, mood-based food recommendations that match the user's emotional state at the time of ordering. Success will be measured by a 35% session conversion rate within 90 days of launch, with an expected increase in average order value among our highest-spending user segment.</p>
+    </div>
+  </div>
+
+  <!-- PROBLEM STATEMENT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">02</div>
+      <h2 class="section-title">Problem Statement</h2>
+    </div>
+    <p class="problem-text">When a working professional or a student opens Swiggy after a long day or during a get-together with their friends, the current experience shows them a <strong>generic list of restaurants and cuisines with no context for how they are feeling.</strong> This usually forces them to scroll endlessly without finding something that matches their emotional need.</p>
+    <div class="pain-points">
+      <div class="pain-card">
+        <div class="pain-icon">😵</div>
+        <div class="pain-title">Decision Fatigue</div>
+        <div class="pain-desc">Too many options with no emotional context forces endless scrolling</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📉</div>
+        <div class="pain-title">Lower Satisfaction</div>
+        <div class="pain-desc">Food chosen without mood alignment feels like a mismatch on delivery</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">💸</div>
+        <div class="pain-title">Missed High-Value Orders</div>
+        <div class="pain-desc">Emotionally-driven orders tend to have higher cart values — currently lost</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- USER PERSONA -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">03</div>
+      <h2 class="section-title">User Persona</h2>
+    </div>
+    <div class="persona-card">
+      <div class="persona-top">
+        <div class="avatar">P</div>
+        <div>
+          <div class="persona-name">Priya</div>
+          <div class="persona-role">26 · Marketing Executive · Bangalore</div>
+        </div>
+      </div>
+      <div class="persona-stats">
+        <div class="stat">
+          <div class="stat-value">4–5x</div>
+          <div class="stat-label">Weekly opens</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">₹500–600</div>
+          <div class="stat-label">Mood-order budget</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Tier-1</div>
+          <div class="stat-label">City</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Non</div>
+          <div class="stat-label">Price sensitive</div>
+        </div>
+      </div>
+      <div class="persona-body">
+        <p>Priya lives in Bangalore with a flatmate. On weekdays she orders quick meals without much thought. But on <strong>Friday evenings or after a tough day at work</strong>, she wants the food to feel like a reward and a moment of relaxation. She is willing to spend ₹500–600 on the right order that matches her mood.</p>
+        <div class="persona-insight">The app does not recognise that her Friday order is emotionally different from her Tuesday lunch — and that gap is the entire opportunity.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROPOSED SOLUTION -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">04</div>
+      <h2 class="section-title">Proposed Solution — Swiggy Moods</h2>
+    </div>
+
+    <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--orange);margin-bottom:12px;">User Journey</div>
+    <div class="journey">
+      <div class="journey-step">
+        <div class="step-box start">Home Page</div>
+        <div class="arrow">›</div>
+      </div>
+      <div class="journey-step">
+        <div class="step-box highlight">Swiggy Moods</div>
+        <div class="arrow">›</div>
+      </div>
+      <div class="journey-step">
+        <div class="step-box">What's your mood?</div>
+        <div class="arrow">›</div>
+      </div>
+      <div class="journey-step">
+        <div class="step-box">Mood Selection</div>
+        <div class="arrow">›</div>
+      </div>
+      <div class="journey-step">
+        <div class="step-box">Curated Options</div>
+        <div class="arrow">›</div>
+      </div>
+      <div class="journey-step">
+        <div class="step-box">Add to Cart</div>
+        <div class="arrow">›</div>
+      </div>
+      <div class="journey-step">
+        <div class="step-box">Checkout</div>
+        <div class="arrow">›</div>
+      </div>
+      <div class="journey-step">
+        <div class="step-box end">Order Placed</div>
+      </div>
+    </div>
+
+    <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--orange);margin-bottom:12px;">Mood Categories</div>
+    <div class="mood-grid">
+      <div class="mood-card">
+        <span class="mood-emoji">😔</span>
+        <div class="mood-name">Bad Day</div>
+        <div class="mood-sub">Let's fix it</div>
+      </div>
+      <div class="mood-card">
+        <span class="mood-emoji">🎉</span>
+        <div class="mood-name">Productive Day</div>
+        <div class="mood-sub">Let's celebrate</div>
+      </div>
+      <div class="mood-card">
+        <span class="mood-emoji">😶</span>
+        <div class="mood-name">Lost</div>
+        <div class="mood-sub">Let's rescue you</div>
+      </div>
+      <div class="mood-card">
+        <span class="mood-emoji">🎬</span>
+        <div class="mood-name">Movie Night</div>
+        <div class="mood-sub">Comfort & snacks</div>
+      </div>
+      <div class="mood-card">
+        <span class="mood-emoji">👯</span>
+        <div class="mood-name">Fun with Friends</div>
+        <div class="mood-sub">Share & celebrate</div>
+      </div>
+    </div>
+
+    <div class="how-it-works">
+      <div class="how-title">How It Works</div>
+      <p>Food listings within each mood category will be populated through a combination of the user's past order data trends and a curated list maintained by Swiggy's restaurant partnerships team. After 3 uses, the feature will begin learning individual mood preferences and will automatically prioritise relevant restaurants and dishes for each mood.</p>
+    </div>
+  </div>
+
+  <!-- SUCCESS METRICS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">05</div>
+      <h2 class="section-title">Success Metrics</h2>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-row">
+        <div class="metric-type primary">Primary Metric</div>
+        <div class="metric-desc">% of users who click on Swiggy Moods and complete an order within the same session</div>
+        <div class="metric-target">35% in 90 days</div>
+      </div>
+      <div class="metric-row">
+        <div class="metric-type habit">Habit Metric</div>
+        <div class="metric-desc">% of users who use Swiggy Moods more than once within 30 days — measures recurring habit vs one-time novelty</div>
+        <div class="metric-target">Track monthly</div>
+      </div>
+      <div class="metric-row">
+        <div class="metric-type guardrail">Guardrail Metric</div>
+        <div class="metric-desc">Overall app bounce rate post feature launch, monitored via A/B test against control group</div>
+        <div class="metric-target">Max +3% change</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRADE-OFFS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">06</div>
+      <h2 class="section-title">Trade-offs</h2>
+    </div>
+    <div class="tradeoff-stack">
+      <div class="tradeoff-row">
+        <div class="tradeoff-label risk">
+          <div class="tradeoff-dot"></div>
+          Risk
+        </div>
+        <div class="tradeoff-text">Price-sensitive users enter Swiggy Moods, see premium options, feel alienated, and leave the app without ordering.</div>
+      </div>
+      <div class="tradeoff-row">
+        <div class="tradeoff-label trigger">
+          <div class="tradeoff-dot"></div>
+          Trigger
+        </div>
+        <div class="tradeoff-text">If the overall app bounce rate increases by more than <strong>3% within the first 30 days</strong> post-launch.</div>
+      </div>
+      <div class="tradeoff-row">
+        <div class="tradeoff-label response">
+          <div class="tradeoff-dot"></div>
+          Response
+        </div>
+        <div class="tradeoff-text">Introduce a <strong>price filter within Swiggy Moods</strong> so users can set a budget before seeing mood-based recommendations. This preserves the emotional discovery experience while making the feature accessible across all price segments.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">Swiggy <span>Moods</span> — Mini PRD</div>
+    <div class="footer-right">PM Portfolio Project · Conceptual Feature Proposal</div>
+  </div>
+
+</div>
+</body>
+</html>
